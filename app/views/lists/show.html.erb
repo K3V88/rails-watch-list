@@ -1,0 +1,15 @@
+<!-- app/views/lists/show.html.erb -->
+<h1><%= @list.name %></h1>
+<!-- Other list details -->
+
+<h2>Bookmarks</h2>
+<ul>
+  <% @list.bookmarks.each do |bookmark| %>
+    <li>
+      <%= link_to bookmark.movie.title, movie_path(bookmark.movie) %>
+      <%= data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger ml-2" %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Back to Lists", lists_path %>
