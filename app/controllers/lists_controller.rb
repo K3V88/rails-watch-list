@@ -9,6 +9,7 @@ class ListsController < ApplicationController
 
   def new
     @list = List.new
+    @list.bookmarks.build
   end
 
   def create
@@ -24,6 +25,6 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:name)
+    params.require(:list).permit(:name, bookmarks_attributes: [:id, :movie_id, :comment])
   end
 end

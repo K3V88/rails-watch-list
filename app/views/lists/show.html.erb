@@ -1,15 +1,18 @@
-<!-- app/views/lists/show.html.erb -->
-<h1><%= @list.name %></h1>
-<!-- Other list details -->
-
-<h2>Bookmarks</h2>
-<ul>
-  <% @list.bookmarks.each do |bookmark| %>
-    <li>
-      <%= link_to bookmark.movie.title, movie_path(bookmark.movie) %>
-      <%= data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger ml-2" %>
-    </li>
+<div class="container">
+  <h1><%= @list.name %></h1>
+  <h2>Movies in the List</h2>
+  <% if @list.bookmarks.any? %>
+    <ul>
+      <% @list.bookmarks.each do |bookmark| %>
+        <li>
+          <strong><%= bookmark.movie.title %></strong>
+          <p><%= bookmark.movie.overview %></p>
+          <p><%= bookmark.movie.rating %></p>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No movies in this list.</p>
   <% end %>
-</ul>
-
-<%= link_to "Back to Lists", lists_path %>
+  <%= link_to "Back to Lists", lists_path, class: "btn btn-secondary mt-3" %>
+</div>

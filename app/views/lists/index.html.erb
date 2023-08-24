@@ -1,0 +1,16 @@
+<div class="container">
+  <h1 class="mb-4">Movie Lists</h1>
+
+  <% @lists.each do |list| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><%= list.name %></h5>
+        <p class="card-text"><strong>Number of Bookmarks:</strong> <%= list.bookmarks.count %></p>
+        <p class="card-text"><strong>Movie Names:</strong> <%= list.bookmarks.map { |bookmark| bookmark.movie.title }.join(', ') %></p>
+        <%= link_to "View Details", list_path(list), class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+
+  <%= link_to "Create New List", new_list_path, class: "btn btn-success" %>
+</div>
