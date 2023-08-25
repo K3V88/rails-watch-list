@@ -1,19 +1,21 @@
-<%= simple_form_for(@list) do |f| %>
-  <%= f.input :name, label: "List Name" %>
+<div class="container">
+  <h1>Create a New Movie List</h1>
+  <%= simple_form_for(@list) do |f| %>
+    <%= f.input :name, label: "List Name" %>
 
-  <h2>Add Movies to the List</h2>
-  <div class="nested-fields" id="movie-fields">
-    <%= f.fields_for :bookmarks do |bookmark_fields| %>
-      <div class="nested-field">
-        <%= bookmark_fields.input :movie_id, as: :select, collection: Movie.all, label: "Select Movie", prompt: "Choose a movie" %>
-        <%= bookmark_fields.input :comment, label: "Comment" %>
-      </div>
-    <% end %>
-  </div>
+    <h2>Add Movies to the List</h2>
+    <div class="nested-fields">
+      <%= f.simple_fields_for :bookmarks do |bookmark_fields| %>
+        <div class="nested-field">
+          <%= bookmark_fields.input :movie_id, as: :select, collection: Movie.all, label: "Select Movie", prompt: "Choose a movie" %>
+          <%= bookmark_fields.input :comment, label: "Comment" %>
+        </div>
+      <% end %>
+    </div>
 
-  <button type="button" id="add-movie" class="btn btn-secondary">Add Movie</button>
 
-  <%= f.submit "Create List", class: "btn btn-primary" %>
-<% end %>
+    <%= f.submit "Create List", class: "btn btn-primary" %>
+  <% end %>
 
-<%= link_to "Back to Lists", lists_path, class: "btn btn-secondary mt-3" %>
+  <%= link_to "Back to Lists", lists_path, class: "btn btn-secondary mt-3" %>
+</div>
