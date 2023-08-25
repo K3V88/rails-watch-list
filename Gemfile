@@ -51,6 +51,8 @@ gem "autoprefixer-rails"
 
 gem "font-awesome-sass", "~> 6.1"
 
+gem "cloudinary"
+
 gem "simple_form"
 
 gem "faker"

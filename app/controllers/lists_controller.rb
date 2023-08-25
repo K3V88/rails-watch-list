@@ -12,11 +12,16 @@ class ListsController < ApplicationController
     @list.bookmarks.build
   end
 
+  def destroy
+    @list = List.find(params[:id])
+    @list.destroy
+    redirect_to lists_path
+  end
+
   def create
     @list = List.new(list_params)
-
     if @list.save
-      redirect_to @list, notice: 'List was successfully created.'
+      redirect_to lists_path
     else
       render :new
     end
@@ -25,6 +30,6 @@ class ListsController < ApplicationController
   private
 
   def list_params
-    params.require(:list).permit(:name, bookmarks_attributes: [:id, :movie_id, :comment])
+    params.require(:list).permit(:name, :photo, bookmarks_attributes: [:id, :movie_id, :comment])
   end
 end

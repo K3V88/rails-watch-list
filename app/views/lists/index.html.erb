@@ -2,17 +2,21 @@
   <h1 class="mb-4">Movie Lists</h1>
   <%= link_to "Create New List", new_list_path, class: "btn btn-success" %>
 
+  <div class="row">
+    <% @lists.each do |list| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <%= cl_image_tag(list.photo.key, width: 400, height: 300, crop: :fill, class: "card-img-top")  unless list.photo.key.nil? %>
 
-  <% @lists.each do |list| %>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title"><%= list.name %></h5>
-        <p class="card-text"><strong>Number of Bookmarks:</strong> <%= list.bookmarks.count %></p>
-        <p class="card-text"><strong>Movie Names:</strong> <%= list.bookmarks.map { |bookmark| bookmark.movie.title }.join(', ') %></p>
-        <%= link_to "View Details", list_path(list), class: "btn btn-primary" %>
+          <div class="card-body">
+            <h5 class="card-title"><%= list.name %></h5>
+            <p class="card-text"><strong>Number of Bookmarks:</strong> <%= list.bookmarks.count %></p>
+            <p class="card-text"><strong>Movie Names:</strong> <%= list.bookmarks.map { |bookmark| bookmark.movie.title }.join(', ') %></p>
+            <%= link_to "View Details", list_path(list), class: "btn btn-primary" %>
+             <%= link_to "Delete", list_path(list), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-danger ml-2" %>
+          </div>
+        </div>
       </div>
-    </div>
-  <% end %>
-
-
+    <% end %>
+  </div>
 </div>
